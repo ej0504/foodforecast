@@ -1,53 +1,26 @@
 package io.edwardjoyce.foodforecast.model;
 
+import com.google.common.collect.ImmutableMap;
+
+import java.util.Map;
+import java.util.Optional;
+
 public final class Ingredient {
 
     private final String name;
-    private final float calories;
-    private final float protein;
-    private final float fat;
-    private final float carbs;
+    private final Map<QuantityUnit, IngredientMacros> macrosPerUnitMap;
 
     public Ingredient(final String name,
-                      final float calories,
-                      final float protein,
-                      float fat,
-                      float carbs) {
+                      final Map<QuantityUnit, IngredientMacros> macrosPerUnitMap) {
         this.name = name;
-        this.calories = calories;
-        this.protein = protein;
-        this.fat = fat;
-        this.carbs = carbs;
+        this.macrosPerUnitMap = ImmutableMap.copyOf(macrosPerUnitMap);
     }
 
     public String getName() {
         return name;
     }
 
-    public float getCalories() {
-        return calories;
-    }
-
-    public float getProtein() {
-        return protein;
-    }
-
-    public float getFat() {
-        return fat;
-    }
-
-    public float getCarbs() {
-        return carbs;
-    }
-
-    @Override
-    public String toString() {
-        return "Ingredient{" +
-                "name='" + name + '\'' +
-                ", calories=" + calories +
-                ", protein=" + protein +
-                ", fat=" + fat +
-                ", carbs=" + carbs +
-                '}';
+    public Optional<IngredientMacros> getMacrosForUnit(final QuantityUnit unit) {
+        return Optional.ofNullable(macrosPerUnitMap.get(unit));
     }
 }
