@@ -2,6 +2,7 @@ package io.edwardjoyce.foodforecast.model;
 
 import com.google.common.collect.ImmutableMap;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,5 +23,33 @@ public final class Ingredient {
 
     public Optional<IngredientMacros> getMacrosForUnit(final QuantityUnit unit) {
         return Optional.ofNullable(macrosPerUnitMap.get(unit));
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private String name;
+        private final Map<QuantityUnit, IngredientMacros> macrosPerUnitMap
+                = new HashMap<>();
+
+        private Builder() { }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder addMacros(final QuantityUnit unit,
+                                 final IngredientMacros macros) {
+            macrosPerUnitMap.put(unit, macros);
+            return this;
+        }
+
+        public Ingredient build() {
+            return new Ingredient(name, macrosPerUnitMap);
+        }
+
     }
 }

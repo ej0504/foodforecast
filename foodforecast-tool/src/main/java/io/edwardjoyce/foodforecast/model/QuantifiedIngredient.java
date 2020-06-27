@@ -5,11 +5,11 @@ import io.edwardjoyce.foodforecast.NoMacrosForUnitException;
 public final class QuantifiedIngredient {
 
     private final Ingredient ingredient;
-    private final float amount;
+    private final double amount;
     private final QuantityUnit quantityUnit;
 
     public QuantifiedIngredient(final Ingredient ingredient,
-                                final float amount,
+                                final double amount,
                                 final QuantityUnit quantityUnit) {
         this.ingredient = ingredient;
         this.amount = amount;
@@ -20,7 +20,7 @@ public final class QuantifiedIngredient {
         return ingredient;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 

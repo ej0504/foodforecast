@@ -2,34 +2,34 @@ package io.edwardjoyce.foodforecast.model;
 
 public final class IngredientMacros {
 
-    private final float calories;
-    private final float protein;
-    private final float fat;
-    private final float carbs;
+    private final double calories;
+    private final double protein;
+    private final double fat;
+    private final double carbs;
 
-    public IngredientMacros(final float calories,
-                      final float protein,
-                      float fat,
-                      float carbs) {
+    public IngredientMacros(final double calories,
+                      final double protein,
+                      final double fat,
+                      final double carbs) {
         this.calories = calories;
         this.protein = protein;
         this.fat = fat;
         this.carbs = carbs;
     }
 
-    public float getCalories() {
+    public double getCalories() {
         return calories;
     }
 
-    public float getProtein() {
+    public double getProtein() {
         return protein;
     }
 
-    public float getFat() {
+    public double getFat() {
         return fat;
     }
 
-    public float getCarbs() {
+    public double getCarbs() {
         return carbs;
     }
 }

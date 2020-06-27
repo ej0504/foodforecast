@@ -1,5 +1,5 @@
 package io.edwardjoyce.foodforecast.model;
 
 public enum QuantityUnit {
-    GRAMS, SINGLE
+    GRAMS_100, SINGLE
 }
