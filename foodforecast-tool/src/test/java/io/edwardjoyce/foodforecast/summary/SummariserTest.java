@@ -43,14 +43,7 @@ class SummariserTest {
                 .getDays(any(LocalDate.class), any(LocalDate.class)))
                 .willReturn(mockDays());
         final var start = LocalDate.of(2020, 6, 6);
-//        summariser.summariseBetween(start,
-//                start.plusDays(7)).forEach(System.out::println);
 
-
-        // assert:
-        // - single day, recipe, ingredient
-        // - above, but multiple recipes, with ingredients in multiple quantities
-        // - above, but multiple days
     }
 
     @Test

@@ -3,7 +3,6 @@ package io.edwardjoyce.foodforecast.summary;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.edwardjoyce.foodforecast.model.Day;
-import io.edwardjoyce.foodforecast.model.QuantifiedIngredient;
 import io.edwardjoyce.foodforecast.model.Recipe;
 import io.edwardjoyce.foodforecast.persistence.FoodForecastPersistenceService;
 import io.edwardjoyce.foodforecast.summary.model.DaySummary;
@@ -13,7 +12,6 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Singleton
 public class Summariser {
@@ -27,12 +25,15 @@ public class Summariser {
 
     public PeriodSummary summariseBetween(final LocalDate fromInclusive, final LocalDate toExclusive) {
 
-        List<Day> days = foodForecastPersistenceService.getDays(fromInclusive, toExclusive);
+        final List<Day> days = foodForecastPersistenceService.getDays(fromInclusive, toExclusive);
 
         final var periodSummaryBuilder = PeriodSummary.builder();
-        days.stream().map(Day::getRecipes).flatMap(Collection::stream)
-                .map(Recipe::getQuantifiedIngredients).flatMap(Collection::stream)
-                        .forEach(periodSummaryBuilder::consumeIngredient);
+        days.stream()
+                .map(Day::getRecipes)
+                .flatMap(Collection::stream)
+                .map(Recipe::getQuantifiedIngredients)
+                .flatMap(Collection::stream)
+                .forEach(periodSummaryBuilder::consumeIngredient);
 
         final List<DaySummary> daySummaries = days.stream()
                 .map(this::summariseDay)
@@ -48,7 +49,6 @@ public class Summariser {
         day.getRecipes().stream()
                 .map(Recipe::getQuantifiedIngredients)
                 .flatMap(Collection::stream)
-//                .sorted() //TODO use comparator to sort
                 .forEach(builder::consumeIngredient);
         return builder.build();
     }
